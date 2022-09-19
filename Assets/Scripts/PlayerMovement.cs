@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Inventory))]
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public Inventory Inventory { get; private set; }
 
     [SerializeField] private float speed = 5;
     private int moveDirection;
     
-
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Inventory = GetComponent<Inventory>();
     }
 
     private void Update()
