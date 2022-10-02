@@ -6,12 +6,20 @@ using UnityEngine;
 public class Storage : MonoBehaviour
 {
     [SerializeField] private IngredientType type;
+    public IngredientType Type => type;
+
     public int Amount { get; private set; }
     [SerializeField] private int maxAmount;
+    public int MaxAmount => maxAmount;
 
     private Inventory player;
 
-        public void Upgrade()
+    private void Start()
+    {
+        StorageManager.Storages.Add(this);
+    }
+    
+    public void Upgrade()
     {
         maxAmount *= 2;
     }
@@ -27,6 +35,22 @@ public class Storage : MonoBehaviour
 
         player.Ingredients[type] -= amount;
         Amount += amount;
+    }
+    
+    public void Deposit(int amount)
+    {
+        var maxDepositAmount = MaxDeposit(amount);
+        if (amount > maxDepositAmount)
+            amount = maxDepositAmount;
+
+        player.Ingredients[type] -= amount;
+        Amount += amount;
+    }
+
+    private void Deposit(int amount, out int leftOver)
+    {
+        
+        leftOver = 0;
     }
 
     public void Withdraw(Inventory player, int amount)
@@ -50,6 +74,13 @@ public class Storage : MonoBehaviour
         return Inventory.maxPerIngredient - player.Ingredients[type] >= 0 ? Inventory.maxPerIngredient - player.Ingredients[type] : 0;
     }
 
+    private int MaxDeposit(int amount)
+    {
+
+
+        return Amount + amount > maxAmount ? maxAmount - Amount : amount;
+    }
+    
     private int MaxDeposit(Inventory player, int amount)
     {
         if (!player.Ingredients.ContainsKey(type))

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public int Balance{ get; private set; }
+    
     public const int maxPerIngredient = 50;
     public Dictionary<IngredientType, int> Ingredients { get; private set; } = new Dictionary<IngredientType, int>();
 
@@ -14,5 +16,10 @@ public class Inventory : MonoBehaviour
         Ingredients.Add(IngredientType.Grain, 15);
         Ingredients.Add(IngredientType.Hop, 45);
         Ingredients.Add(IngredientType.Yeast, 70);
+    }
+
+    public void Buy(int cost)
+    {
+        Balance -= cost;
     }
 }
