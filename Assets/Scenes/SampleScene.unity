@@ -178,9 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 1776582407}
+  amount: {fileID: 46641153}
+  price: {fileID: 537774222}
+  acceptButton: {fileID: 1323624186}
 --- !u!114 &14583786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1105,9 +1106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 1130695758}
+  amount: {fileID: 1624635293}
+  price: {fileID: 1640988393}
+  acceptButton: {fileID: 296453194}
 --- !u!114 &245451183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2196,9 +2198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 662580163}
+  amount: {fileID: 1185885780}
+  price: {fileID: 583655652}
+  acceptButton: {fileID: 997630901}
 --- !u!114 &397299382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2329,8 +2332,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274861683a40a9942935878039a75efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buyDealDisplays: []
-  sellDealDisplays: []
+  buyDealDisplays:
+  - {fileID: 878134710}
+  - {fileID: 624009977}
+  - {fileID: 1791870748}
+  - {fileID: 1619258785}
+  - {fileID: 924103290}
+  sellDealDisplays:
+  - {fileID: 397299381}
+  - {fileID: 1230746580}
+  - {fileID: 245451182}
+  - {fileID: 1336526429}
+  - {fileID: 14583785}
 --- !u!1 &409856840
 GameObject:
   m_ObjectHideFlags: 0
@@ -3868,9 +3881,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 195738234}
+  amount: {fileID: 967963026}
+  price: {fileID: 1035998247}
+  acceptButton: {fileID: 316116040}
 --- !u!114 &624009978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5696,9 +5710,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 789514087}
+  amount: {fileID: 1489997985}
+  price: {fileID: 1891738220}
+  acceptButton: {fileID: 778482854}
 --- !u!114 &878134711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5902,9 +5917,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 1365687613}
+  amount: {fileID: 536241615}
+  price: {fileID: 475231549}
+  acceptButton: {fileID: 421519744}
 --- !u!114 &924103291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7639,9 +7655,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 957947032}
+  amount: {fileID: 874631479}
+  price: {fileID: 818483883}
+  acceptButton: {fileID: 1537569535}
 --- !u!114 &1230746581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7726,7 +7743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1241015207
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8855,9 +8872,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 1257725048}
+  amount: {fileID: 1335729389}
+  price: {fileID: 990434772}
+  acceptButton: {fileID: 1902018733}
 --- !u!114 &1336526430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10710,9 +10728,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 359521501}
+  amount: {fileID: 1793274634}
+  price: {fileID: 2029439262}
+  acceptButton: {fileID: 471670979}
 --- !u!114 &1619258786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11480,9 +11499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de28a6cf57fcc54f9456ee7741b7302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: {fileID: 0}
-  price: {fileID: 0}
-  acceptButton: {fileID: 0}
+  itemName: {fileID: 1827170829}
+  amount: {fileID: 1503334710}
+  price: {fileID: 646709105}
+  acceptButton: {fileID: 1568369441}
 --- !u!114 &1791870749
 MonoBehaviour:
   m_ObjectHideFlags: 0
