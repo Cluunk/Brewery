@@ -5,21 +5,56 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public int Balance{ get; private set; }
+    [SerializeField] private InventoryDisplay inventoryDisplay;
+    public int Balance { get; private set; } = 5000;
     
-    public const int maxPerIngredient = 50;
-    public Dictionary<IngredientType, int> Ingredients { get; private set; } = new Dictionary<IngredientType, int>();
+    public const int maxPerItem = 50;
+    
+    public Dictionary<ItemType, int> Items { get; } = new Dictionary<ItemType, int>();
 
     private void Start()
     {
-        Ingredients.Add(IngredientType.Water, 35);
-        Ingredients.Add(IngredientType.Grain, 15);
-        Ingredients.Add(IngredientType.Hop, 45);
-        Ingredients.Add(IngredientType.Yeast, 70);
+        /*Items.Add(ItemType.Water, 35);
+        Items.Add(ItemType.Grain, 15);
+        Items.Add(ItemType.Hop, 45);
+        Items.Add(ItemType.Yeast, 70);*/
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab) && !PlayerMovement.Interacting)
+            ToggleInventory();
     }
 
     public void Buy(int cost)
     {
         Balance -= cost;
+    }
+
+    private void ToggleInventory()
+    {
+        if (!inventoryDisplay)
+            return;
+        inventoryDisplay.gameObject.SetActive(!inventoryDisplay.gameObject.activeSelf);
+        inventoryDisplay.DisplayInventory();
+    }
+
+    public void AddItem(ItemType item, int amount)
+    {
+        if (PlayerMovement.Inventory.Items.ContainsKey(item))
+            PlayerMovement.Inventory.Items[item] += amount;
+        else
+            PlayerMovement.Inventory.Items.Add(item, amount);
+
+        if (PlayerMovement.Inventory.Items[item] > maxPerItem)
+            PlayerMovement.Inventory.Items[item] = maxPerItem;
+    }
+
+    public int FreeSpaceForItem(ItemType item)
+    {
+        if (!Items.ContainsKey(item))
+            return maxPerItem;
+
+        return maxPerItem - Items[item];
     }
 }

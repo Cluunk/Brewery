@@ -5,9 +5,9 @@ using UnityEngine;
 
 public static class StorageManager
 {
-    public static List<Storage> Storages { get; private set; }
+    public static List<Storage> Storages { get; private set; } = new List<Storage>();
 
-    public static bool StoreIngredients(IngredientType type, int amount)
+    public static bool StoreIngredients(ItemType type, int amount)
     {
         var availableStorages = FindStoragesOfType(type);
 
@@ -26,12 +26,12 @@ public static class StorageManager
         return true;
     }
 
-    public static void EmptyStorage(IngredientType type, int amount)
+    public static void EmptyStorage(ItemType type, int amount)
     {
         
     }
 
-    private static Storage[] FindStoragesOfType(IngredientType type)
+    private static Storage[] FindStoragesOfType(ItemType type)
     {
         return Storages.Where(storage => storage.Type == type).ToArray();
     }

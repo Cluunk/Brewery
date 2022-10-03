@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour
 {
-    [SerializeField] private IngredientType type;
-    public IngredientType Type => type;
+    [SerializeField] private ItemType type;
+    public ItemType Type => type;
 
     public int Amount { get; private set; }
     [SerializeField] private int maxAmount;
@@ -26,14 +26,14 @@ public class Storage : MonoBehaviour
 
     public void Deposit(Inventory player, int amount)
     {
-        if (!player.Ingredients.ContainsKey(type))
+        if (!player.Items.ContainsKey(type))
             return;
         
         var maxDepositAmount = MaxDeposit(player, amount);
         if (amount > maxDepositAmount)
             amount = maxDepositAmount;
 
-        player.Ingredients[type] -= amount;
+        player.Items[type] -= amount;
         Amount += amount;
     }
     
@@ -43,7 +43,7 @@ public class Storage : MonoBehaviour
         if (amount > maxDepositAmount)
             amount = maxDepositAmount;
 
-        player.Ingredients[type] -= amount;
+        player.Items[type] -= amount;
         Amount += amount;
     }
 
@@ -55,23 +55,23 @@ public class Storage : MonoBehaviour
 
     public void Withdraw(Inventory player, int amount)
     {
-        if (!player.Ingredients.ContainsKey(type))
+        if (!player.Items.ContainsKey(type))
             return;
         
         var maxWithdrawAmount = MaxWithdraw(player);
         if (amount > maxWithdrawAmount)
             amount = maxWithdrawAmount;
 
-        player.Ingredients[type] += amount;
+        player.Items[type] += amount;
         Amount -= amount;
     }
 
     private int MaxWithdraw(Inventory player)
     {
-        if (!player.Ingredients.ContainsKey(type))
-            return Inventory.maxPerIngredient;
+        if (!player.Items.ContainsKey(type))
+            return Inventory.maxPerItem;
 
-        return Inventory.maxPerIngredient - player.Ingredients[type] >= 0 ? Inventory.maxPerIngredient - player.Ingredients[type] : 0;
+        return Inventory.maxPerItem - player.Items[type] >= 0 ? Inventory.maxPerItem - player.Items[type] : 0;
     }
 
     private int MaxDeposit(int amount)
@@ -83,11 +83,11 @@ public class Storage : MonoBehaviour
     
     private int MaxDeposit(Inventory player, int amount)
     {
-        if (!player.Ingredients.ContainsKey(type))
+        if (!player.Items.ContainsKey(type))
             return 0;
 
-        if (amount > player.Ingredients[type])
-            return player.Ingredients[type];
+        if (amount > player.Items[type])
+            return player.Items[type];
 
         return Amount + amount > maxAmount ? maxAmount - Amount : amount;
     }
@@ -96,7 +96,7 @@ public class Storage : MonoBehaviour
     {
         if (!other.GetComponent<PlayerMovement>())
             return;
-        player = other.GetComponent<PlayerMovement>().Inventory;
+        player = PlayerMovement.Inventory;
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -110,12 +110,12 @@ public class Storage : MonoBehaviour
         if (player && Input.GetKeyDown(KeyCode.T))
         {
             Deposit(player, 5);
-            Debug.Log($"{type}      Inventory: {player.Ingredients[type]}      Storage: {Amount}");
+            Debug.Log($"{type}      Inventory: {player.Items[type]}      Storage: {Amount}");
         }
         if (player && Input.GetKeyDown(KeyCode.Q))
         {
             Withdraw(player, 7);
-            Debug.Log($"{type}      Inventory: {player.Ingredients[type]}      Storage: {Amount}");
+            Debug.Log($"{type}      Inventory: {player.Items[type]}      Storage: {Amount}");
         }
     }
 }

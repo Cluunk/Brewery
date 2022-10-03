@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public Inventory Inventory { get; private set; }
+    public static Inventory Inventory { get; private set; }
 
     [SerializeField] private float speed = 5;
     private int moveDirection;
@@ -14,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
+
+    public static bool Interacting { get; private set; }
+
+    private List<IInteractable> interactables = new List<IInteractable>();
 
     private void Start()
     {
@@ -23,6 +28,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (interactables.Count <= 0)
+                return;
+            
+            if (Interacting)
+                interactables[0].QuitInteraction();
+            else
+                interactables[0].Interact(this);
+            Interacting = !Interacting;
+        }
+        
+        if (Interacting)
+            return;
         MoveInput();
     }
 
@@ -59,5 +78,21 @@ public class PlayerMovement : MonoBehaviour
     private bool OnGround()
     {
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        var interactable = other.GetComponent<IInteractable>();
+        if (interactable == null)
+            return;
+        interactables.Add(interactable);
+    }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        var interactable = other.GetComponent<IInteractable>();
+        if (interactable == null)
+            return;
+        interactables.Remove(interactable);
     }
 }

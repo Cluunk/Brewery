@@ -2,25 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuyDeal : Deal
+[CreateAssetMenu(fileName = "BuyItemDeal", menuName = "ScriptableObjects/Deals/BuyItemDeal")]
+public class BuyItemDeal : Deal
 {
-    private IngredientType type;
-    private int amountToBuy;
-
-    [SerializeField] private int cost;
-    public int Cost => cost;
-    
-    
     public override void AcceptDeal(Inventory player)
     {
         if (!DealPossible(player))
             return;
-        player.Buy(cost);
+        player.Buy(Price);
         
     }
 
     public override bool DealPossible(Inventory player)
     {
-        return player.Balance >= Cost;
+        return player.Balance >= Price;
     }
 }
