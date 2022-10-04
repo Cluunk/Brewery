@@ -14,14 +14,23 @@ public class DealDisplay : MonoBehaviour
 
     public void GenerateDisplay(Deal deal)
     {
+        if (!deal)
+            return;
+        
         itemName.text = deal.Item.ToString();
         amount.text = deal.Amount.ToString();
         price.text = deal.Price + "$";
+        acceptButton.onClick.RemoveAllListeners();
         acceptButton.onClick.AddListener(() => deal.AcceptDeal(PlayerMovement.Inventory));
+        acceptButton.interactable = true;
     }
 
     public void Clear()
     {
-        
+        itemName.text = "";
+        amount.text = "";
+        price.text = "";
+        acceptButton.onClick.RemoveAllListeners();
+        acceptButton.interactable = false;
     }
 }

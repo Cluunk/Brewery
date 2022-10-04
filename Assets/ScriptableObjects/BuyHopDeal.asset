@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ee4708bf6e2bee47946a38c450fbdb5, type: 3}
-  m_Name: BuyItemDeal
+  m_Name: BuyHopDeal
   m_EditorClassIdentifier: 
-  item: 5
-  amount: 25
-  price: 50
+  item: 1
+  amount: 40
+  price: 15

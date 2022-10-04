@@ -6,7 +6,12 @@ public class MarketOverlay : MonoBehaviour
 {
     [SerializeField] private DealDisplay[] buyDealDisplays;
     [SerializeField] private DealDisplay[] sellDealDisplays;
-    
+
+    public void OpenOverlay()
+    {
+        
+    }
+
     public void OpenDealOverlay(Deal[] deals, bool buy)
     {
         if (buy)
@@ -15,12 +20,10 @@ public class MarketOverlay : MonoBehaviour
                 buyDeal.gameObject.SetActive(true);
             foreach (var sellDeal in sellDealDisplays)
                 sellDeal.gameObject.SetActive(false);
-            for (int i = 0, availableDeals = deals.Length; i < buyDealDisplays.Length; i++)
+            for (var i = 0; i < buyDealDisplays.Length; i++)
             {
-                if (i >= availableDeals)
-                    buyDealDisplays[i].Clear();
-                else
-                    buyDealDisplays[i].GenerateDisplay(deals[i]);
+                buyDealDisplays[i].Clear();
+                buyDealDisplays[i].GenerateDisplay(deals[i]);
             }
         }
         else
@@ -30,12 +33,10 @@ public class MarketOverlay : MonoBehaviour
             foreach (var sellDeal in sellDealDisplays)
                 sellDeal.gameObject.SetActive(true);
             
-            for (int i = 0, availableDeals = deals.Length; i < sellDealDisplays.Length; i++)
+            for (var i = 0; i < sellDealDisplays.Length; i++)
             {
-                if (i >= availableDeals)
-                    sellDealDisplays[i].Clear();
-                else
-                    sellDealDisplays[i].GenerateDisplay(deals[i]);
+                sellDealDisplays[i].Clear();
+                sellDealDisplays[i].GenerateDisplay(deals[i]);
             }
         }
     }

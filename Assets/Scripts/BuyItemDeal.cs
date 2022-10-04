@@ -5,12 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BuyItemDeal", menuName = "ScriptableObjects/Deals/BuyItemDeal")]
 public class BuyItemDeal : Deal
 {
-    public override void AcceptDeal(Inventory player)
+    public override void AcceptDeal(Inventory inventory)
     {
-        if (!DealPossible(player))
+        if (!DealPossible(inventory))
             return;
-        player.Buy(Price);
-        
+        inventory.Buy(Price);
+        inventory.AddItem(Item, Amount);
     }
 
     public override bool DealPossible(Inventory player)

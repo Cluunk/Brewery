@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private InventoryDisplay inventoryDisplay;
     public int Balance { get; private set; } = 5000;
     
-    public const int maxPerItem = 50;
+    public const int maxPerItem = 500;
     
     public Dictionary<ItemType, int> Items { get; } = new Dictionary<ItemType, int>();
 
@@ -29,6 +29,7 @@ public class Inventory : MonoBehaviour
     public void Buy(int cost)
     {
         Balance -= cost;
+        
     }
 
     private void ToggleInventory()
