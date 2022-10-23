@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private InventoryDisplay inventoryDisplay;
     public int Balance { get; private set; } = 5000;
     
-    public const int maxPerItem = 500;
+    //public const int maxPerItem = 500;
     
     public Dictionary<ItemType, int> Items { get; } = new Dictionary<ItemType, int>();
 
@@ -47,15 +47,15 @@ public class Inventory : MonoBehaviour
         else
             PlayerMovement.Inventory.Items.Add(item, amount);
 
-        if (PlayerMovement.Inventory.Items[item] > maxPerItem)
-            PlayerMovement.Inventory.Items[item] = maxPerItem;
+        //if (PlayerMovement.Inventory.Items[item] > maxPerItem)
+        //   PlayerMovement.Inventory.Items[item] = maxPerItem;
     }
 
-    public int FreeSpaceForItem(ItemType item)
+    /*public int FreeSpaceForItem(ItemType item)
     {
         if (!Items.ContainsKey(item))
             return maxPerItem;
 
         return maxPerItem - Items[item];
-    }
+    }*/
 }

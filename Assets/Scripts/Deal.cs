@@ -5,11 +5,9 @@ using UnityEngine;
 
 public abstract class Deal : ScriptableObject
 {
-    [SerializeField] private ItemType item;
-    public ItemType Item => item;
-
+    public abstract string DealName();
+    
     [SerializeField] private int amount;
-
     public int Amount => amount;
 
     [SerializeField] private int price;

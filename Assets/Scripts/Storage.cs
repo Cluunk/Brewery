@@ -53,7 +53,7 @@ public class Storage : MonoBehaviour
         leftOver = 0;
     }
 
-    public void Withdraw(Inventory player, int amount)
+    /*public void Withdraw(Inventory player, int amount)
     {
         if (!player.Items.ContainsKey(type))
             return;
@@ -72,7 +72,7 @@ public class Storage : MonoBehaviour
             return Inventory.maxPerItem;
 
         return Inventory.maxPerItem - player.Items[type] >= 0 ? Inventory.maxPerItem - player.Items[type] : 0;
-    }
+    }*/
 
     private int MaxDeposit(int amount)
     {
@@ -114,7 +114,7 @@ public class Storage : MonoBehaviour
         }
         if (player && Input.GetKeyDown(KeyCode.Q))
         {
-            Withdraw(player, 7);
+            //Withdraw(player, 7);
             Debug.Log($"{type}      Inventory: {player.Items[type]}      Storage: {Amount}");
         }
     }

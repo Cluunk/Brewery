@@ -53,7 +53,7 @@ public class InventoryDisplay : MonoBehaviour
             }
 
             slots[i].NameDisplay.text = items[startIndex + i].Item.ToString();
-            slots[i].AmountDisplay.text = $"{items[startIndex + i].Amount}/{Inventory.maxPerItem}";
+            slots[i].AmountDisplay.text = $"{items[startIndex + i].Amount}";///{Inventory.maxPerItem}";
         }
 
         currentPage = page;

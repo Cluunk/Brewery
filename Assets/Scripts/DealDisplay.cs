@@ -17,7 +17,7 @@ public class DealDisplay : MonoBehaviour
         if (!deal)
             return;
         
-        itemName.text = deal.Item.ToString();
+        itemName.text = deal.DealName();
         amount.text = deal.Amount.ToString();
         price.text = deal.Price + "$";
         acceptButton.onClick.RemoveAllListeners();
