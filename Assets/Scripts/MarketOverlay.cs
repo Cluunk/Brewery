@@ -1,43 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MarketOverlay : MonoBehaviour
 {
-    [SerializeField] private DealDisplay[] buyDealDisplays;
-    [SerializeField] private DealDisplay[] sellDealDisplays;
+    [SerializeField] private Market market;
 
+    [SerializeField] private GameObject buyDealDisplay;
+    [SerializeField] private GameObject sellDealDisplay;
+
+    [SerializeField] private TextMeshProUGUI balanceDisplay;
+    
+    [SerializeField] private GameObject DealScrollView;
+
+    private List<DealDisplay> activeDeals = new List<DealDisplay>();
+
+    public void UpdateBalance()
+    {
+        balanceDisplay.text = $"Balance: {PlayerMovement.Inventory.Balance}";
+    }
+    
     public void OpenOverlay()
     {
-        
+        gameObject.SetActive(true);
+        DisplayBuyDeals();
+        UpdateBalance();
     }
-
-    public void OpenDealOverlay(Deal[] deals, bool buy)
+    
+    public void CloseOverlay()
     {
-        if (buy)
+        gameObject.SetActive(false);
+    }
+    
+    public void DisplayBuyDeals() =>
+        OpenDealOverlay(market.BuyDeals, DealType.BuyItem);
+
+    public void DisplaySellDeals() =>
+        OpenDealOverlay(market.SellDeals, DealType.SellItem);
+
+    public void DisplayRecipeDeals() =>
+        OpenDealOverlay(market.RecipeDeals, DealType.BuyRecipe);
+    
+    private void OpenDealOverlay(List<Deal> deals, DealType dealType)
+    {
+        foreach (var dealDisplay in activeDeals)
         {
-            foreach (var buyDeal in buyDealDisplays)
-                buyDeal.gameObject.SetActive(true);
-            foreach (var sellDeal in sellDealDisplays)
-                sellDeal.gameObject.SetActive(false);
-            for (var i = 0; i < buyDealDisplays.Length; i++)
-            {
-                buyDealDisplays[i].Clear();
-                buyDealDisplays[i].GenerateDisplay(deals[i]);
-            }
+            if(dealDisplay) 
+                Destroy(dealDisplay.gameObject);
         }
-        else
+        activeDeals.Clear();
+
+        var display = dealType is DealType.BuyItem or DealType.BuyRecipe ? buyDealDisplay : sellDealDisplay;
+
+        var scrollViewRect = DealScrollView.GetComponent<RectTransform>();
+        scrollViewRect.sizeDelta = new Vector2(scrollViewRect.sizeDelta.x, display.GetComponent<RectTransform>().rect.height * deals.Count);
+
+        foreach (var deal in deals)
         {
-            foreach (var buyDeal in buyDealDisplays)
-                buyDeal.gameObject.SetActive(false);
-            foreach (var sellDeal in sellDealDisplays)
-                sellDeal.gameObject.SetActive(true);
-            
-            for (var i = 0; i < sellDealDisplays.Length; i++)
-            {
-                sellDealDisplays[i].Clear();
-                sellDealDisplays[i].GenerateDisplay(deals[i]);
-            }
+            activeDeals.Add(Instantiate(display, DealScrollView.transform).GetComponent<DealDisplay>());
+            activeDeals[^1].GenerateDisplay(market, deal);
         }
     }
 }

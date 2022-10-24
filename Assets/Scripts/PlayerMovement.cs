@@ -39,9 +39,13 @@ public class PlayerMovement : MonoBehaviour
                 interactables[0].Interact(this);
             Interacting = !Interacting;
         }
-        
+
         if (Interacting)
+        {
+            moveDirection = 0;
             return;
+        }
+
         MoveInput();
     }
 

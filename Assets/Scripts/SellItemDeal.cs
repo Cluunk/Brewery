@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BuyItemDeal", menuName = "ScriptableObjects/Deals/BuyItemDeal")]
-public class BuyItemDeal : Deal
+[CreateAssetMenu(fileName = "SellItemDeal", menuName = "ScriptableObjects/Deals/SellItemDeal")]
+public class SellItemDeal : Deal
 {
     [SerializeField] private ItemType item;
     public ItemType Item => item;
 
     [SerializeField] private int amount;
     public int Amount => amount;
-
-    public override DealType Type() => 
-        DealType.BuyItem;
+    
+    public override DealType Type() =>
+        DealType.SellItem;
 
     public override string DealName() =>
         item.ToString();
@@ -21,13 +21,13 @@ public class BuyItemDeal : Deal
     {
         if (!DealPossible(player))
             return;
-        player.Buy(Price);
-        player.AddItem(Item, Amount);
+        player.Sell(Price);
+        player.Items[Item] -= amount;
         market.Overlay.UpdateBalance();
     }
 
     protected override bool DealPossible(Inventory player)
     {
-        return player.Balance >= Price;
+        return player.Items[Item] >= amount;
     }
 }

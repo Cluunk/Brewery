@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee4708bf6e2bee47946a38c450fbdb5, type: 3}
   m_Name: BuyGrainDeal
   m_EditorClassIdentifier: 
+  price: 100
   item: 0
-  amount: 30
-  price: 10
+  amount: 75

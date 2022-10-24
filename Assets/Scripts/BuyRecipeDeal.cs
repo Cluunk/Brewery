@@ -2,21 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BuyItemDeal", menuName = "ScriptableObjects/Deals/BuyItemDeal")]
+[CreateAssetMenu(fileName = "BuyRecipeDeal", menuName = "ScriptableObjects/Deals/BuyRecipeDeal")]
 public class BuyRecipeDeal : Deal
 {
-    public override string DealName()
+    [SerializeField] private Recipe recipe;
+
+    public override DealType Type() =>
+        DealType.BuyRecipe;
+
+    public override string DealName() =>
+        recipe.RecipeName;
+
+    public override void AcceptDeal(Market market, Inventory player)
     {
-        throw new System.NotImplementedException();
+        if (!DealPossible(player))
+            return;
+        player.Buy(Price);
+        player.UnlockedRecipes.Add(recipe);
+        market.RecipeDeals.Remove(this);
+        market.Overlay.DisplayRecipeDeals();
+        market.Overlay.UpdateBalance();
     }
 
-    public override void AcceptDeal(Inventory player)
+    protected override bool DealPossible(Inventory player)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool DealPossible(Inventory player)
-    {
-        throw new System.NotImplementedException();
+        return player.Balance >= Price;
     }
 }

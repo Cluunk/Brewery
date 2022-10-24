@@ -9,17 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f96ef8df9a63f48439af42ff4ba3ec25, type: 3}
-  m_Name: Recipe
+  m_Script: {fileID: 11500000, guid: 0ee4708bf6e2bee47946a38c450fbdb5, type: 3}
+  m_Name: BuyWaterDeal
   m_EditorClassIdentifier: 
-  ingredients:
-  - type: 0
-    amount: 5
-  - type: 1
-    amount: 5
-  - type: 3
-    amount: 5
-  - type: 2
-    amount: 5
-  outputItem: 4
-  outputAmount: 20
+  price: 10
+  item: 3
+  amount: 50

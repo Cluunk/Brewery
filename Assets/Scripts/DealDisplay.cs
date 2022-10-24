@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,25 +9,33 @@ public class DealDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI price;
     [SerializeField] private Button acceptButton;
 
-    public void GenerateDisplay(Deal deal)
+    public void GenerateDisplay(Market market, Deal deal)
     {
         if (!deal)
             return;
         
         itemName.text = deal.DealName();
-        amount.text = deal.Amount.ToString();
-        price.text = deal.Price + "$";
-        acceptButton.onClick.RemoveAllListeners();
-        acceptButton.onClick.AddListener(() => deal.AcceptDeal(PlayerMovement.Inventory));
-        acceptButton.interactable = true;
-    }
 
-    public void Clear()
-    {
-        itemName.text = "";
-        amount.text = "";
-        price.text = "";
-        acceptButton.onClick.RemoveAllListeners();
-        acceptButton.interactable = false;
+        switch (deal.Type())
+        {
+            case DealType.BuyItem:
+                var buyDeal = deal as BuyItemDeal;
+                amount.text = buyDeal.Amount.ToString();
+                break;
+            case DealType.SellItem:
+                var sellDeal = deal as SellItemDeal;
+                amount.text = sellDeal.Amount.ToString();
+                break;
+            case DealType.BuyRecipe:/*
+                amount.text = "Recipe";
+                amount.fontStyle = FontStyles.Italic;*/
+                break;
+            default:
+                amount.text = string.Empty;
+                break;
+        }
+        price.text = deal.Price + "$";
+        acceptButton.onClick.AddListener(() => deal.AcceptDeal(market, PlayerMovement.Inventory));
+        acceptButton.interactable = true;
     }
 }

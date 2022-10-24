@@ -6,37 +6,27 @@ using UnityEngine;
 public class Market : MonoBehaviour, IInteractable
 {
     [SerializeField] private MarketOverlay overlay;
+    public MarketOverlay Overlay => overlay;
     
-    [SerializeField] private Deal[] buyDeals = new Deal[5];
-    public Deal[] BuyDeals => buyDeals;
+    [SerializeField] private List<Deal> buyDeals = new List<Deal>();
+    public List<Deal> BuyDeals => buyDeals;
     
-    [SerializeField] private Deal[] sellDeals = new Deal[5];
-    public Deal[] SellDeals => sellDeals;
+    [SerializeField] private List<Deal> sellDeals = new List<Deal>();
+    public List<Deal> SellDeals => sellDeals;
+    
+    [SerializeField] private List<Deal> recipeDeals = new List<Deal>();
+    public List<Deal> RecipeDeals => recipeDeals;
 
-    private void Start()
-    {
-        DisplayBuyDeals();
-    }
 
     public void Interact(PlayerMovement player)
     {
         if (PlayerMovement.Interacting)
             return;
-        
+        overlay.OpenOverlay();
     }
 
     public void QuitInteraction()
     {
-        
-    }
-
-    public void DisplayBuyDeals()
-    {
-        overlay.OpenDealOverlay(buyDeals, true);
-    }
-
-    public void DisplaySellDeals()
-    {
-        overlay.OpenDealOverlay(sellDeals, false);
+        overlay.CloseOverlay();
     }
 }

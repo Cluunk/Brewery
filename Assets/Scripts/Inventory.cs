@@ -6,10 +6,12 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private InventoryDisplay inventoryDisplay;
-    public int Balance { get; private set; } = 5000;
+    public int Balance { get; private set; } = 2500;
     
     //public const int maxPerItem = 500;
-    
+    [SerializeField] private Recipe baseRecipe;
+    public List<Recipe> UnlockedRecipes { get; } = new List<Recipe>();
+
     public Dictionary<ItemType, int> Items { get; } = new Dictionary<ItemType, int>();
 
     private void Start()
@@ -18,6 +20,7 @@ public class Inventory : MonoBehaviour
         Items.Add(ItemType.Grain, 15);
         Items.Add(ItemType.Hop, 45);
         Items.Add(ItemType.Yeast, 70);*/
+        UnlockedRecipes.Add(baseRecipe);
     }
 
     private void Update()
@@ -29,7 +32,10 @@ public class Inventory : MonoBehaviour
     public void Buy(int cost)
     {
         Balance -= cost;
-        
+    }
+    public void Sell(int profit)
+    {
+        Balance += profit;
     }
 
     private void ToggleInventory()
