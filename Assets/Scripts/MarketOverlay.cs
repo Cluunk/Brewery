@@ -19,7 +19,7 @@ public class MarketOverlay : MonoBehaviour
 
     public void UpdateBalance()
     {
-        balanceDisplay.text = $"Balance: {PlayerMovement.Inventory.Balance}";
+        balanceDisplay.text = $"{PlayerMovement.Inventory.Balance}$ / {Inventory.BalanceGoal}$";
     }
     
     public void OpenOverlay()
@@ -52,7 +52,7 @@ public class MarketOverlay : MonoBehaviour
         }
         activeDeals.Clear();
 
-        var display = dealType is DealType.BuyItem or DealType.BuyRecipe ? buyDealDisplay : sellDealDisplay;
+        var display = dealType == DealType.BuyItem || dealType == DealType.BuyRecipe ? buyDealDisplay : sellDealDisplay;
 
         var scrollViewRect = DealScrollView.GetComponent<RectTransform>();
         scrollViewRect.sizeDelta = new Vector2(scrollViewRect.sizeDelta.x, display.GetComponent<RectTransform>().rect.height * deals.Count);

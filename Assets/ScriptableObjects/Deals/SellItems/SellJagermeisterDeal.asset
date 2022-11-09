@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 964ac257807a9fe42a1f30c8514cf578, type: 3}
-  m_Name: "SellJ\xE4germeisterDeal"
+  m_Name: SellJagermeisterDeal
   m_EditorClassIdentifier: 
   price: 2000
   item: 12

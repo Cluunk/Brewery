@@ -13,7 +13,7 @@ public enum ItemType
     Spices,
     Beer,
     Vodka,
-    Jägermeister,
+    Jagermeister,
     Wine,
     Bottle
 }

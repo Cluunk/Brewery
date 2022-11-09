@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f96ef8df9a63f48439af42ff4ba3ec25, type: 3}
-  m_Name: "J\xE4germeisterRecipe"
+  m_Name: JagermeisterRecipe
   m_EditorClassIdentifier: 
-  recipeName: "J\xE4germeister"
+  recipeName: Jagermeister
   ingredients:
   - type: 8
     amount: 10

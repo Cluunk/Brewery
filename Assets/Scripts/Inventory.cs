@@ -6,7 +6,8 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private InventoryDisplay inventoryDisplay;
-    public int Balance { get; private set; } = 2500;
+    public int Balance { get; private set; } = 5000;
+    public const int BalanceGoal = 250000;
     
     //public const int maxPerItem = 500;
     [SerializeField] private Recipe baseRecipe;

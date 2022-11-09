@@ -26,10 +26,6 @@ public class DealDisplay : MonoBehaviour
                 var sellDeal = deal as SellItemDeal;
                 amount.text = sellDeal.Amount.ToString();
                 break;
-            case DealType.BuyRecipe:/*
-                amount.text = "Recipe";
-                amount.fontStyle = FontStyles.Italic;*/
-                break;
             default:
                 amount.text = string.Empty;
                 break;

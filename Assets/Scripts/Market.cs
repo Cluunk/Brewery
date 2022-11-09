@@ -17,6 +17,10 @@ public class Market : MonoBehaviour, IInteractable
     [SerializeField] private List<Deal> recipeDeals = new List<Deal>();
     public List<Deal> RecipeDeals => recipeDeals;
 
+    private void Start()
+    {
+        overlay.UpdateBalance();
+    }
 
     public void Interact(PlayerMovement player)
     {

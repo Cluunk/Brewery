@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private List<IInteractable> interactables = new List<IInteractable>();
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         Inventory = GetComponent<Inventory>();
