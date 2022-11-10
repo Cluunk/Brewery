@@ -6,10 +6,9 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private InventoryDisplay inventoryDisplay;
-    public int Balance { get; private set; } = 5000;
+    public int Balance { get; private set; } = 2500;
     public const int BalanceGoal = 250000;
     
-    //public const int maxPerItem = 500;
     [SerializeField] private Recipe baseRecipe;
     public List<Recipe> UnlockedRecipes { get; } = new List<Recipe>();
 
@@ -53,16 +52,5 @@ public class Inventory : MonoBehaviour
             PlayerMovement.Inventory.Items[item] += amount;
         else
             PlayerMovement.Inventory.Items.Add(item, amount);
-
-        //if (PlayerMovement.Inventory.Items[item] > maxPerItem)
-        //   PlayerMovement.Inventory.Items[item] = maxPerItem;
     }
-
-    /*public int FreeSpaceForItem(ItemType item)
-    {
-        if (!Items.ContainsKey(item))
-            return maxPerItem;
-
-        return maxPerItem - Items[item];
-    }*/
 }

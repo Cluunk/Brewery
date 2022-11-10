@@ -23,10 +23,9 @@ public class BuyItemDeal : Deal
             return;
         player.Buy(Price);
         player.AddItem(Item, Amount);
-        market.Overlay.UpdateBalance();
     }
 
-    protected override bool DealPossible(Inventory player)
+    public override bool DealPossible(Inventory player)
     {
         return player.Balance >= Price;
     }

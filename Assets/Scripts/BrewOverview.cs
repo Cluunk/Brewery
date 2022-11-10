@@ -16,6 +16,9 @@ public class BrewOverview : MonoBehaviour
     
     private Recipe activeRecipe;
 
+    [SerializeField] private AudioClip brewSound;
+    [SerializeField] private AudioClip selectSound;
+
     private List<IngredientDisplay> activeDisplays = new List<IngredientDisplay>();
     private List<RecipeSelector> recipeSelectors = new List<RecipeSelector>();
 
@@ -56,6 +59,7 @@ public class BrewOverview : MonoBehaviour
         activeRecipe = recipe;
         recipeNameDisplay.text = $"{recipe.OutputAmount}x {recipe.OutputItem}";
         GenerateIngredientList(activeRecipe);
+        SoundManager.Instance.PlayAudio(selectSound);
     }
 
 
@@ -84,14 +88,11 @@ public class BrewOverview : MonoBehaviour
     {
         if (!activeRecipe)
             return;
+
+        if (!activeRecipe.RecipePossible())
+            return;
         
-        foreach (var ingredient in activeRecipe.Ingredients)
-        {
-            if (!PlayerMovement.Inventory.Items.ContainsKey(ingredient.Type))
-                return;
-            if (PlayerMovement.Inventory.Items[ingredient.Type] < ingredient.Amount)
-                return;
-        }
+        SoundManager.Instance.PlayAudio(brewSound);
 
         foreach (var ingredient in activeRecipe.Ingredients)
             PlayerMovement.Inventory.Items[ingredient.Type] -= ingredient.Amount;

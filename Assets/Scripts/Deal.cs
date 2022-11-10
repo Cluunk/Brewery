@@ -14,5 +14,5 @@ public abstract class Deal : ScriptableObject
     
     public abstract void AcceptDeal(Market market, Inventory player);
 
-    protected abstract bool DealPossible(Inventory player);
+    public abstract bool DealPossible(Inventory player);
 }

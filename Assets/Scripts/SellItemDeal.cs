@@ -23,11 +23,12 @@ public class SellItemDeal : Deal
             return;
         player.Sell(Price);
         player.Items[Item] -= amount;
-        market.Overlay.UpdateBalance();
     }
 
-    protected override bool DealPossible(Inventory player)
+    public override bool DealPossible(Inventory player)
     {
+        if (!player.Items.ContainsKey(item))
+            return false;
         return player.Items[Item] >= amount;
     }
 }

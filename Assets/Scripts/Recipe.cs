@@ -17,4 +17,17 @@ public class Recipe : ScriptableObject
 
     [SerializeField] private int outputAmount;
     public int OutputAmount => outputAmount;
+
+    public bool RecipePossible()
+    {
+        foreach (var ingredient in Ingredients)
+        {
+            if (!PlayerMovement.Inventory.Items.ContainsKey(ingredient.Type))
+                return false;
+            if (PlayerMovement.Inventory.Items[ingredient.Type] < ingredient.Amount)
+                return false;
+        }
+
+        return true;
+    }
 }

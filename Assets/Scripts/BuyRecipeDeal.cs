@@ -21,10 +21,9 @@ public class BuyRecipeDeal : Deal
         player.UnlockedRecipes.Add(recipe);
         market.RecipeDeals.Remove(this);
         market.Overlay.DisplayRecipeDeals();
-        market.Overlay.UpdateBalance();
     }
 
-    protected override bool DealPossible(Inventory player)
+    public override bool DealPossible(Inventory player)
     {
         return player.Balance >= Price;
     }

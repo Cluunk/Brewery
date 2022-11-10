@@ -17,9 +17,12 @@ public class Market : MonoBehaviour, IInteractable
     [SerializeField] private List<Deal> recipeDeals = new List<Deal>();
     public List<Deal> RecipeDeals => recipeDeals;
 
+    public event Notify AcceptDeal;
+
     private void Start()
     {
         overlay.UpdateBalance();
+        AcceptDeal += overlay.UpdateBalance;
     }
 
     public void Interact(PlayerMovement player)
@@ -32,5 +35,10 @@ public class Market : MonoBehaviour, IInteractable
     public void QuitInteraction()
     {
         overlay.CloseOverlay();
+    }
+
+    public void AcceptDealTrigger()
+    {
+        AcceptDeal?.Invoke();
     }
 }

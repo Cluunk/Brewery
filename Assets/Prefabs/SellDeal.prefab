@@ -759,3 +759,4 @@ MonoBehaviour:
   amount: {fileID: 5533456262159929691}
   price: {fileID: 5533456262631710699}
   acceptButton: {fileID: 5533456263061281978}
+  acceptAudio: {fileID: 8300000, guid: 6062e38145d08bc4aa0ddf671eae19dd, type: 3}

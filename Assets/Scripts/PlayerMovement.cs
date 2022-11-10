@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public static Inventory Inventory { get; private set; }
 
+    [SerializeField] private Animator animator;
+
     [SerializeField] private float speed = 5;
     private int moveDirection;
     
@@ -28,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        animator.Play(moveDirection != 0 ? "PlayerWalk" : "PlayerIdle");
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (interactables.Count <= 0)

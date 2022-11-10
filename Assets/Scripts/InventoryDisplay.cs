@@ -1,98 +1,69 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryDisplay : MonoBehaviour
 {
-    [SerializeField] private Inventory inventory;
-    [SerializeField] private InventorySlot[] slots;
+    [SerializeField] private GameObject inventoryItem;
+    [SerializeField] private ItemType[] ingredients;
+    [SerializeField] private ItemType[] booze;
+    [SerializeField] private GameObject itemScrollView;
 
-    [SerializeField] private Button next;
-    [SerializeField] private Button previous;
+    [SerializeField] private List<GameObject> activeItems;
+    [SerializeField] private AudioClip openDisplaySound;
+
     
-    private int currentPage;
-    private List<InventoryItem> items;
-
     public void DisplayInventory()
     {
-        items = InventoryItemsToList();
-        DisplayPage(0);
-    }
-    
-    public void GoToNextPage()
-    {
-        DisplayPage(currentPage + 1);
-    }
-    
-    public void GoToPreviousPage()
-    {
-        DisplayPage(currentPage - 1);
+        DisplayIngredients();
     }
 
-    private void DisplayPage(int page)
+    public void DisplayIngredients()
     {
-        foreach (var slot in slots)
-            ClearSlot(slot);
-        
-        if (items.Count <= 0)
-            return;
+        var ingredientsInInventory = new List<InventoryItem>();
 
-        if (page <= 0)
-            page = 0;
-        if (page >= (float)items.Count / slots.Length)
-            page = items.Count / slots.Length;
-        
-        for (int i = 0, startIndex = page * slots.Length; i < slots.Length; i++)
+        foreach (var (key, value) in PlayerMovement.Inventory.Items)
         {
-            if (startIndex + i >= items.Count){
-                ClearSlot(slots[i]);
-                continue;
-            }
-
-            slots[i].NameDisplay.text = items[startIndex + i].Item.ToString();
-            slots[i].AmountDisplay.text = $"{items[startIndex + i].Amount}";///{Inventory.maxPerItem}";
+            if (ingredients.Contains(key))
+                ingredientsInInventory.Add(new InventoryItem(key, value));
         }
-
-        currentPage = page;
-        
-        SetNavigationButtons();
+        SoundManager.Instance.PlayAudio(openDisplaySound);
+        GenerateItemDisplays(ingredientsInInventory);
     }
     
-    private List<InventoryItem> InventoryItemsToList()
+    public void DisplayBooze()
     {
-        var t = new List<InventoryItem>();
-        foreach (var item in inventory.Items)
-            t.Add(new InventoryItem(item.Key, item.Value));
+        var boozeInInventory = new List<InventoryItem>();
 
-        return t;
+        foreach (var (key, value) in PlayerMovement.Inventory.Items)
+        {
+            if (booze.Contains(key))
+                boozeInInventory.Add(new InventoryItem(key, value));
+        }
+        SoundManager.Instance.PlayAudio(openDisplaySound);
+        GenerateItemDisplays(boozeInInventory);
     }
 
-    private void ClearSlot(InventorySlot slot)
+    private void GenerateItemDisplays(List<InventoryItem> items)
     {
-        slot.NameDisplay.text = "Empty";
-        slot.AmountDisplay.text = "";
+        foreach (var item in activeItems)
+            Destroy(item);
+        
+        var scrollViewRect = itemScrollView.GetComponent<RectTransform>();
+        scrollViewRect.sizeDelta = new Vector2(scrollViewRect.sizeDelta.x, inventoryItem.GetComponent<RectTransform>().rect.height * items.Count);
+        
+        foreach (var item in items)
+        {
+            activeItems.Add(Instantiate(inventoryItem, itemScrollView.transform));
+            var texts = activeItems[^1].GetComponentsInChildren<TextMeshProUGUI>();
+            texts[0].text = item.Item.ToString();
+            texts[1].text = item.Amount.ToString();
+        }
     }
-
-    private void SetNavigationButtons()
-    {
-        next.gameObject.SetActive(items.Count % slots.Length == 0 ? 
-            currentPage < items.Count / slots.Length - 1 : 
-            currentPage < items.Count / slots.Length);
-        previous.gameObject.SetActive(currentPage > 0);
-    }
-}
-
-[Serializable]
-internal class InventorySlot
-{
-    [SerializeField] private TextMeshProUGUI nameDisplay;
-    public TextMeshProUGUI NameDisplay => nameDisplay;
-
-    [SerializeField] private TextMeshProUGUI amountDisplay;
-    public TextMeshProUGUI AmountDisplay => amountDisplay;
 }
 
 internal class InventoryItem

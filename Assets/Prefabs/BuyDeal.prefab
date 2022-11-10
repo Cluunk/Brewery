@@ -97,6 +97,7 @@ MonoBehaviour:
   amount: {fileID: 2084924481087736319}
   price: {fileID: 2084924480686013234}
   acceptButton: {fileID: 2084924479639203320}
+  acceptAudio: {fileID: 8300000, guid: 6062e38145d08bc4aa0ddf671eae19dd, type: 3}
 --- !u!1 &2084924479639203322
 GameObject:
   m_ObjectHideFlags: 0

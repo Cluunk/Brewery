@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,6 +18,8 @@ public class MarketOverlay : MonoBehaviour
 
     private List<DealDisplay> activeDeals = new List<DealDisplay>();
 
+    [SerializeField] private AudioClip openDisplaySound;
+
     public void UpdateBalance()
     {
         balanceDisplay.text = $"{PlayerMovement.Inventory.Balance}$ / {Inventory.BalanceGoal}$";
@@ -33,15 +36,23 @@ public class MarketOverlay : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    
-    public void DisplayBuyDeals() =>
+
+    public void DisplayBuyDeals()
+    {
         OpenDealOverlay(market.BuyDeals, DealType.BuyItem);
+        SoundManager.Instance.PlayAudio(openDisplaySound);
+    }
 
-    public void DisplaySellDeals() =>
+    public void DisplaySellDeals()
+    {
         OpenDealOverlay(market.SellDeals, DealType.SellItem);
+        SoundManager.Instance.PlayAudio(openDisplaySound);
+    }
 
-    public void DisplayRecipeDeals() =>
+    public void DisplayRecipeDeals() {
         OpenDealOverlay(market.RecipeDeals, DealType.BuyRecipe);
+        SoundManager.Instance.PlayAudio(openDisplaySound);
+    }
     
     private void OpenDealOverlay(List<Deal> deals, DealType dealType)
     {
